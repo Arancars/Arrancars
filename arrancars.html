@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arancars Discord - Communauté Manga & Anime</title>
+    <link rel="icon" href="https://cdn.discordapp.com/icons/1332838203706834995/54ce0699fc144443ad0f1c0fd5fb0589.webp" type="image/webp">
+    <style>
+        :root {
+            --primary-color: #FF4B87;
+            --secondary-color: #6C2BD9;
+            --text-color: #ffffff;
+            --background-color: #1B1A2A;
+            --card-bg: #2D2B42;
+            --accent-color: #00E5FF;
+            --transition: all 0.3s ease;
+        }
+
+        body.light-theme {
+            --primary-color: #FF4B87;
+            --secondary-color: #9D71EA;
+            --text-color: #1B1A2A;
+            --background-color: #F4F1FF;
+            --card-bg: #ffffff;
+            --accent-color: #00C2CC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Comic Sans MS", "Bangers", cursive;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: var(--transition);
+            overflow-x: hidden;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            border-bottom: 4px solid var(--accent-color);
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .manga-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+        }
+
+        #theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        #theme-toggle:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #FF4B87, #6C2BD9);
+            border-radius: 15px;
+            transform: rotate(45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: 3px solid var(--accent-color);
+        }
+        
+        .logo-content {
+            transform: rotate(-45deg);
+            font-size: 60px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 3px 3px 0 var(--secondary-color), 6px 6px 0 rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: rotate(45deg);
+            animation: shineEffect 3s infinite;
+        }
+        
+        .logo::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at top right, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+            z-index: 1;
+        }
+
+        @keyframes shineEffect {
+            0% {
+                left: -200%;
+                top: -200%;
+            }
+            100% {
+                left: 100%;
+                top: 100%;
+            }
+        }
+
+        h1 {
+            font-size: 54px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            color: white;
+            text-shadow: 3px 3px 0 var(--accent-color), 6px 6px 0 rgba(0, 0, 0, 0.2);
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+        }
+
+        h1::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            color: var(--accent-color);
+            z-index: -1;
+            filter: blur(3px);
+        }
+
+        .tagline {
+            font-size: 24px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            font-style: italic;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(0) rotate(0);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px) rotate(2deg);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .feature-card h3 {
+            margin: 20px 0;
+            color: var(--primary-color);
+            font-size: 26px;
+            position: relative;
+        }
+
+        .feature-card h3::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 10px auto;
+        }
+
+        .feature-icon {
+            font-size: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-icon::after {
+            content: "";
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            box-shadow: 0 0 20px var(--accent-color);
+        }
+
+        .join-section {
+            text-align: center;
+            margin: 80px 0;
+            padding: 60px 40px;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            border: 3px solid var(--accent-color);
+        }
+
+        .join-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 60%, rgba(0, 229, 255, 0.1));
+            z-index: 0;
+        }
+
+        .join-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .join-section p {
+            font-size: 20px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .join-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 30px;
+            transition: var(--transition);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: 2px solid transparent;
+        }
+
+        .join-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .join-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            border-color: white;
+        }
+
+        .join-btn:hover::before {
+            left: 100%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            font-size: 16px;
+            position: relative;
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 100;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .animated {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animated.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Manga/Anime Style Elements */
+        .manga-speed-lines {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(90deg, 
+                transparent 0%, 
+                transparent 97%, 
+                rgba(255, 255, 255, 0.1) 97.5%, 
+                transparent 98%),
+                linear-gradient(90deg, 
+                transparent 0%, 
+                transparent 98.5%, 
+                rgba(255, 255, 255, 0.1) 99%, 
+                transparent 99.5%);
+            background-size: 100px 100%, 200px 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .manga-speech-bubble {
+            position: absolute;
+            right: 20px;
+            top: 80px;
+            background-color: white;
+            color: black;
+            padding: 15px;
+            border-radius: 20px;
+            max-width: 200px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-size: 16px;
+            transform: rotate(5deg);
+            z-index: 10;
+            display: none;
+        }
+
+        .manga-speech-bubble::before {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 20px;
+            border-width: 20px 20px 0;
+            border-style: solid;
+            border-color: white transparent transparent;
+        }
+
+        @media (max-width: 768px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 36px;
+            }
+            .manga-speech-bubble {
+                display: none;
+            }
+        }
+
+        /* Character */
+        .anime-character {
+            position: absolute;
+            right: 50px;
+            bottom: -80px;
+            width: 150px;
+            height: 150px;
+            background-color: var(--primary-color);
+            border-radius: 50% 50% 0 0;
+            border: 3px solid white;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            z-index: 5;
+            display: none;
+        }
+
+        .anime-character .face {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .anime-character .eyes {
+            position: absolute;
+            top: 40%;
+            width: 20px;
+            height: 30px;
+            background-color: white;
+            border-radius: 50%;
+            animation: blink 4s infinite;
+        }
+
+        .anime-character .eyes::after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: black;
+            border-radius: 50%;
+            top: 5px;
+            left: 5px;
+        }
+
+        .anime-character .eyes.left {
+            left: 35px;
+        }
+
+        .anime-character .eyes.right {
+            right: 35px;
+        }
+
+        .anime-character .mouth {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 5px;
+            background-color: black;
+            border-radius: 0 0 10px 10px;
+        }
+
+        @keyframes blink {
+            0%, 95%, 100% {
+                transform: scaleY(1);
+            }
+            97% {
+                transform: scaleY(0);
+            }
+        }
+
+        @media (min-width: 992px) {
+            .anime-character {
+                display: block;
+            }
+            .manga-speech-bubble {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="manga-pattern"></div>
+    <div class="manga-speed-lines"></div>
+    
+    <header>
+        <div class="logo"><div class="logo-content">A</div></div>
+        <h1 data-text="Arancars">Arrancars</h1>
+        <p class="tagline">Le serveur Discord pour les fans de manga & anime</p>
+        <button id="theme-toggle">Changer de thème</button>
+        
+        <div class="anime-character">
+            <div class="face">
+                <div class="eyes left"></div>
+                <div class="eyes right"></div>
+                <div class="mouth"></div>
+            </div>
+        </div>
+        
+        <div class="manga-speech-bubble">
+            Rejoins-nous sur Arrancars !
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="features">
+            <div class="feature-card animated">
+                <div class="feature-icon">📺</div>
+                <h3>Anime & Manga</h3>
+                <p>Discutez des derniers épisodes, partagez vos mangas préférés et faites des recommandations</p>
+            </div>
+            <div class="feature-card animated">
+                <div class="feature-icon">🎮</div>
+                <h3>Gaming</h3>
+                <p>Rejoignez nos sessions de jeux vidéo inspirés de vos animes préférés</p>
+            </div>
+            <div class="feature-card animated">
+                <div class="feature-icon">🎨</div>
+                <h3>Fan Art</h3>
+                <p>Partagez vos créations et découvrez les talents de notre communauté</p>
+            </div>
+        </div>
+
+        <div class="join-section animated">
+            <h2>Prêt à nous rejoindre ?</h2>
+            <p>Rejoins des centaines de fans d'anime et de manga sur notre serveur Discord !</p>
+            <a href="https://discord.gg/dVxzHqs6v9" class="join-btn">Rejoindre Arancars</a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Arrancars Discord - Une communauté de passion pour l'anime et le manga
+    </footer>
+
+    <div class="scroll-top">↑</div>
+
+    <script>
+        // Animation au défilement
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animated');
+            const scrollTop = document.querySelector('.scroll-top');
+            
+            function checkScroll() {
+                // Animer les éléments au scroll
+                animatedElements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition < windowHeight - 100) {
+                        element.classList.add('show');
+                    }
+                });
+                
+                // Afficher/cacher le bouton "remonter"
+                if (window.pageYOffset > 300) {
+                    scrollTop.classList.add('visible');
+                } else {
+                    scrollTop.classList.remove('visible');
+                }
+            }
+            
+            // Fonction pour remonter en haut
+            scrollTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            window.addEventListener('scroll', checkScroll);
+            checkScroll(); // Vérifier au chargement initial
+        });
+
+        // Changement de thème
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('light-theme');
+            
+            if (document.body.classList.contains('light-theme')) {
+                themeToggle.textContent = 'Mode sombre';
+            } else {
+                themeToggle.textContent = 'Mode clair';
+            }
+        });
+        
+        // Animation de la bulle de dialogue
+        setTimeout(() => {
+            const bubble = document.querySelector('.manga-speech-bubble');
+            if (bubble) {
+                bubble.style.transform = 'rotate(-5deg)';
+                setTimeout(() => {
+                    bubble.style.transform = 'rotate(5deg)';
+                }, 3000);
+            }
+        }, 2000);
+    </script>
+</body>
+</html>
